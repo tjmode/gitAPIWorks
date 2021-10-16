@@ -31,10 +31,15 @@ class ViewController: UIViewController {
     }
     @objc func methodOfReceivedNotification(notification: Notification) {
         viewModel.load(data: notification.object as! [repoModel])
-        DispatchQueue.main.async {
-            self.repoTableView?.reloadData()
+        if viewModel.isDataAvailable() {
+            DispatchQueue.main.async {
+                self.repoTableView?.reloadData()
+            }
+        } else {
+            noDataLabel?.isHidden = false
         }
     }
+
     func moveToDetails(with index: Int) {
         let detailsViewController = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
         detailsViewController.data = viewModel.repoData[index]

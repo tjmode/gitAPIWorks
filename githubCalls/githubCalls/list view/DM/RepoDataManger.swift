@@ -10,7 +10,7 @@ class RepoDataManger {
     func fetchData() {
         var finalArray = [repoModel]()
         let session = URLSession.shared
-        let url = URL(string: "https://api.github.com/users/tjmode/repos")!
+        let url = URL(string: "https://api.github.com/user/tjmode/repos")!
         let task = session.dataTask(with: url) { data, response, error in
             
             if error != nil || data == nil {
