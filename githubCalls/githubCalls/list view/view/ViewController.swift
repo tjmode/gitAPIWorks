@@ -28,6 +28,9 @@ class ViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("dataLoaded"), object: nil)
+        if !viewModel.isDataAvailable() {
+            noDataLabel?.isHidden = false
+        }
     }
     @objc func methodOfReceivedNotification(notification: Notification) {
         viewModel.load(data: notification.object as! [repoModel])
